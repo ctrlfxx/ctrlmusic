@@ -306,6 +306,7 @@ dependencies {
     implementation(libs.smoothCorner)
     implementation(libs.lottie.compose)
     implementation(libs.haze)
+    implementation(libs.haze.glass)
     implementation(libs.work.runtime.ktx)
     implementation(libs.androidx.core.splashscreen)
 

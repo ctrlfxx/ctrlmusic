@@ -32,6 +32,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -71,6 +72,17 @@ fun FloatingNavigationBar(
 ) {
     val containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
     val outlineColor = if (pureBlack) Color(0xFF222222) else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
+    val glassOn = LocalLiquidGlass.current != null && !pureBlack
+    val pillShape = remember { RoundedCornerShape(percent = 50) }
+    // Normal look: shadow + solid fill + outline. Liquid Glass: real refracting glass instead.
+    val pillSurface: Modifier = if (glassOn) {
+        Modifier.liquidGlass(pillShape)
+    } else {
+        Modifier
+            .shadow(elevation = 6.dp, shape = CircleShape)
+            .background(containerColor, shape = CircleShape)
+            .border(width = 1.dp, color = outlineColor, shape = CircleShape)
+    }
     
     // Left items are all main screens EXCEPT Search
     val leftItems = remember(navigationItems) {
@@ -90,9 +102,7 @@ fun FloatingNavigationBar(
         Row(
             modifier = Modifier
                 .height(64.dp)
-                .shadow(elevation = 6.dp, shape = CircleShape)
-                .background(containerColor, shape = CircleShape)
-                .border(width = 1.dp, color = outlineColor, shape = CircleShape)
+                .then(pillSurface)
                 .padding(horizontal = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp)
@@ -120,9 +130,7 @@ fun FloatingNavigationBar(
         Box(
             modifier = Modifier
                 .size(64.dp)
-                .shadow(elevation = 6.dp, shape = CircleShape)
-                .background(containerColor, shape = CircleShape)
-                .border(width = 1.dp, color = outlineColor, shape = CircleShape),
+                .then(pillSurface),
             contentAlignment = Alignment.Center
         ) {
             FloatingNavItem(

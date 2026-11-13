@@ -176,6 +176,11 @@ import com.ctrlfxx.ctrlmusic.constants.SelectedThemeColorKey
 import com.ctrlfxx.ctrlmusic.constants.SlimNavBarHeight
 import com.ctrlfxx.ctrlmusic.constants.SlimNavBarKey
 import com.ctrlfxx.ctrlmusic.constants.FloatingNavBarKey
+import com.ctrlfxx.ctrlmusic.constants.LiquidGlassKey
+import com.ctrlfxx.ctrlmusic.ui.component.LocalLiquidGlass
+import com.ctrlfxx.ctrlmusic.ui.component.liquidGlass
+import dev.chrisbanes.haze.hazeSource
+import dev.chrisbanes.haze.rememberHazeState
 import com.ctrlfxx.ctrlmusic.constants.StopMusicOnTaskClearKey
 import com.ctrlfxx.ctrlmusic.constants.UseNewMiniPlayerDesignKey
 import com.ctrlfxx.ctrlmusic.constants.UseAppleMiniPlayerKey
@@ -987,6 +992,11 @@ class MainActivity : ComponentActivity() {
 
                 val baseBg = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
 
+                // Liquid Glass (iOS 26 style): the screens below are the backdrop that glass bars blur.
+                val (liquidGlass) = rememberPreference(LiquidGlassKey, defaultValue = true)
+                val glassHazeState = rememberHazeState()
+                val activeGlass = if (liquidGlass) glassHazeState else null
+
                 CompositionLocalProvider(
                     LocalDatabase provides database,
                     LocalContentColor provides if (pureBlack) Color.White else contentColorFor(MaterialTheme.colorScheme.surface),
@@ -997,6 +1007,7 @@ class MainActivity : ComponentActivity() {
                     LocalSyncUtils provides syncUtils,
                     LocalListenTogetherManager provides listenTogetherManager,
                     LocalSnackbarHostState provides snackbarHostState,
+                    LocalLiquidGlass provides activeGlass,
                 ) {
                     Scaffold(
                         containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surface,
@@ -1102,13 +1113,15 @@ class MainActivity : ComponentActivity() {
                                         },
                                         scrollBehavior = topAppBarScrollBehavior,
                                         colors = TopAppBarDefaults.topAppBarColors(
-                                            containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surface,
-                                            scrolledContainerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surface,
+                                            containerColor = if (activeGlass != null) Color.Transparent else if (pureBlack) Color.Black else MaterialTheme.colorScheme.surface,
+                                            scrolledContainerColor = if (activeGlass != null) Color.Transparent else if (pureBlack) Color.Black else MaterialTheme.colorScheme.surface,
                                             titleContentColor = MaterialTheme.colorScheme.onSurface,
                                             actionIconContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                             navigationIconContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                                         ),
-                                        modifier = Modifier.windowInsetsPadding(
+                                        modifier = Modifier
+                                            .liquidGlass(RoundedCornerShape(0.dp), tintAlpha = 0.55f)
+                                            .windowInsetsPadding(
                                             if (showRail) {
                                                 WindowInsets(left = NavigationBarHeight)
                                                     .add(cutoutInsets.only(WindowInsetsSides.Start))
@@ -1301,7 +1314,7 @@ class MainActivity : ComponentActivity() {
                                     onSearchLongClick = onRailSearchLongClick
                                 )
                             }
-                            Box(Modifier.weight(1f)) {
+                            Box(Modifier.weight(1f).then(if (activeGlass != null) Modifier.hazeSource(glassHazeState) else Modifier)) {
                                 // NavHost with animations (Material 3 Expressive style)
                                 NavHost(
                                     navController = navController,

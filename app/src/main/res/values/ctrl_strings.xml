@@ -1227,4 +1227,6 @@
     <string name="based_on_vivi_desc">Open source, GPL-3.0. Thanks to Vividh P Ashokan and the Metrolist project</string>
     <string name="offline_mix">Offline mix</string>
     <string name="no_offline_songs_left">No downloaded songs left in the queue</string>
+    <string name="liquid_glass">Liquid Glass</string>
+    <string name="liquid_glass_desc">iOS 26-style glass on the tab bar, top bar and chips</string>
 </resources>

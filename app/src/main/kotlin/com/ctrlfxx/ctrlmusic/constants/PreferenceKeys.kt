@@ -61,6 +61,7 @@ enum class DensityScale(val value: Float, val label: String) {
 val DefaultOpenTabKey = stringPreferencesKey("defaultOpenTab")
 val SlimNavBarKey = booleanPreferencesKey("slimNavBar")
 val FloatingNavBarKey = booleanPreferencesKey("floatingNavBar")
+val LiquidGlassKey = booleanPreferencesKey("liquidGlass")
 val GridItemsSizeKey = stringPreferencesKey("gridItemSize")
 val SliderStyleKey = stringPreferencesKey("sliderStyle")
 val SquigglySliderKey = booleanPreferencesKey("squigglySlider")
