@@ -66,7 +66,6 @@ fun <E> ChipsRow(
     modifier: Modifier = Modifier,
     containerColor: Color = MaterialTheme.colorScheme.surfaceContainer,
 ) {
-    val glassOn = LocalLiquidGlass.current != null
     Row(
         modifier =
         modifier
@@ -89,20 +88,12 @@ fun <E> ChipsRow(
                 label = "corner_radius"
             )
 
-            val chipShape = RoundedCornerShape(cornerRadius)
             FilterChip(
                 label = { Text(label) },
                 selected = isSelected,
-                colors = if (glassOn) {
-                    FilterChipDefaults.filterChipColors(
-                        containerColor = Color.Transparent,
-                        selectedContainerColor = Color.Transparent,
-                    )
-                } else {
-                    FilterChipDefaults.filterChipColors(
-                        containerColor = containerColor,
-                    )
-                },
+                colors = FilterChipDefaults.filterChipColors(
+                    containerColor = containerColor,
+                ),
                 onClick = { onValueUpdate(value) },
                 leadingIcon = if (isSelected) {
                     {
@@ -115,10 +106,9 @@ fun <E> ChipsRow(
                 } else {
                     null
                 },
-                shape = chipShape,
+                shape = RoundedCornerShape(cornerRadius),
                 border = null,
                 modifier = Modifier
-                    .then(if (glassOn) Modifier.glassChipSurface(chipShape, isSelected) else Modifier)
                     .height(35.dp)
                     .animateContentSize(
                         animationSpec = spring(

@@ -25,9 +25,9 @@ android {
         applicationId = "com.ctrlfxx.ctrlmusic"
         minSdk = 26
         targetSdk = 37
-        versionCode = 1
+        versionCode = 2
         val betaVersionName = project.findProperty("betaVersionName") as String?
-        versionName = betaVersionName ?: "1.0.0"
+        versionName = betaVersionName ?: "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -306,7 +306,6 @@ dependencies {
     implementation(libs.smoothCorner)
     implementation(libs.lottie.compose)
     implementation(libs.haze)
-    implementation(libs.haze.glass)
     implementation(libs.work.runtime.ktx)
     implementation(libs.androidx.core.splashscreen)
 

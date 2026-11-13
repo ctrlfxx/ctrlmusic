@@ -97,7 +97,6 @@ import com.ctrlfxx.ctrlmusic.constants.ShowTopPlaylistKey
 import com.ctrlfxx.ctrlmusic.constants.SliderStyle
 import com.ctrlfxx.ctrlmusic.constants.SliderStyleKey
 import com.ctrlfxx.ctrlmusic.constants.FloatingNavBarKey
-import com.ctrlfxx.ctrlmusic.constants.LiquidGlassKey
 import com.ctrlfxx.ctrlmusic.constants.SlimNavBarKey
 import com.ctrlfxx.ctrlmusic.constants.SquigglySliderKey
 import com.ctrlfxx.ctrlmusic.constants.SwipeSensitivityKey
@@ -328,7 +327,6 @@ fun AppearanceSettings(
         FloatingNavBarKey,
         defaultValue = true
     )
-    val (liquidGlass, onLiquidGlassChange) = rememberPreference(LiquidGlassKey, defaultValue = true)
 
     // Density scale preferences
     val context = activity as Context
@@ -1973,27 +1971,6 @@ fun AppearanceSettings(
                         )
                     },
                     onClick = { onFloatingNavBarChange(!floatingNavBar) }
-                ),
-                Material3SettingsItem(
-                    icon = painterResource(R.drawable.liquid_glass),
-                    title = { Text(stringResource(R.string.liquid_glass)) },
-                    description = { Text(stringResource(R.string.liquid_glass_desc)) },
-                    trailingContent = {
-                        Switch(
-                            checked = liquidGlass,
-                            onCheckedChange = onLiquidGlassChange,
-                            thumbContent = {
-                                Icon(
-                                    painter = painterResource(
-                                        id = if (liquidGlass) R.drawable.check else R.drawable.close
-                                    ),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(SwitchDefaults.IconSize)
-                                )
-                            }
-                        )
-                    },
-                    onClick = { onLiquidGlassChange(!liquidGlass) }
                 ),
                 Material3SettingsItem(
                     icon = painterResource(R.drawable.grid_view),
