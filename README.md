@@ -19,11 +19,6 @@
 Grab `CtrlMusic.apk` from [Releases](https://github.com/ctrlfxx/ctrlmusic/releases) (64-bit phones; `CtrlMusic-universal.apk` for older devices).
 Every push also builds an APK under the **Actions** tab.
 
-## Build a release
-
-Push a tag such as `v1.0.0`. GitHub Actions builds signed APKs and publishes a release.
-Signing uses the `KEYSTORE_BASE64`, `STORE_PASSWORD`, `KEY_ALIAS` and `KEY_PASSWORD` repository secrets.
-
 ## Credits and license
 
 Ctrl Music is a fork of [VIVI Music](https://github.com/vivizzz007/vivi-music) by Vividh P Ashokan,
