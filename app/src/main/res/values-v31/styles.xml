@@ -6,14 +6,14 @@
         <item name="android:windowMinWidthMinor">100%</item>
         <item name="android:windowMinWidthMajor">100%</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">#1F1F1F</item>
+        <item name="android:windowBackground">#181717</item>
         <item name="android:enforceNavigationBarContrast">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <!-- Ctrl Music splash: CM mark on charcoal -->
-        <item name="android:windowSplashScreenBackground">#1F1F1F</item>
+        <item name="android:windowSplashScreenBackground">#181717</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="android:windowSplashScreenIconBackgroundColor">#1F1F1F</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">#181717</item>
     </style>
 
     <!-- Widget Theme for Android 12+ with Dynamic Colors -->

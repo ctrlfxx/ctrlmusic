@@ -41,7 +41,7 @@ fun ConclusionPage(onClose: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             androidx.compose.foundation.Image(
-                painter = painterResource(id = R.drawable.icon),
+                painter = painterResource(id = R.drawable.ctrl_logo_glow),
                 contentDescription = stringResource(R.string.wrapped_logo_content_description),
                 modifier = Modifier
                     .size(96.dp)

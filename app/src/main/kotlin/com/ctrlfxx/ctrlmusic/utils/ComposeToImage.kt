@@ -252,7 +252,7 @@ object ComposeToImage {
         val appNameY = headerY + logoIconSize / 2f - (appNamePaint.descent() + appNamePaint.ascent()) / 2f
         canvas.drawText(appName, appNameX, appNameY, appNamePaint)
 
-        // Draw Official New Vivi Music App Icon (R.drawable.icon) with circular clipping
+        // Draw the Ctrl Music logo (R.drawable.icon) with circular clipping
         val rawLogo = androidx.core.content.ContextCompat.getDrawable(context, R.drawable.icon)?.toBitmap(
             width = logoIconSize.roundToInt(),
             height = logoIconSize.roundToInt()
